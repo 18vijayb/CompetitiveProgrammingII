@@ -63,20 +63,18 @@ public class TriColorPaintings {
                 if (different.containsKey(i))
                 {
                     List<Integer> differentColor = different.get(i);
+                    System.out.println("OKAY IM LOOKING AT THE " + (i+1) + "th stripe and the number of different color constraints on it is " + differentColor.size());
                     for (int j: differentColor)
                     {
-                        if (i<j && numCombos[j]>1)
+                        if (i<j && numCombos[j]>0)
                             numCombos[j]--;
-                        else if (i<j && numCombos[j]==1)
-                                if (numCombos[i]>1)
-                                    numCombos[i]--;
                     }
                 }
             }
             int runningMult = 1;
             for (int i: numCombos)
                 runningMult*=i;
-            //System.out.println(Arrays.toString(numCombos));
+            System.out.println(Arrays.toString(numCombos));
             System.out.println(runningMult);
         }
         catch (Exception e )
