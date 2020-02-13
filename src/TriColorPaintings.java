@@ -67,10 +67,8 @@ public class TriColorPaintings {
         Set<Integer> availableGoodColors = new HashSet<>();
         if (same.containsKey(currentIndex))
         {
-            //System.out.println("Yo im at the " + currentIndex + " index");
             List<Integer> sameList = same.get(currentIndex);
             availableGoodColors.add(currentPainting[sameList.get(sameList.size()-1)]);
-            //System.out.println(availableGoodColors);
         }
         else
         {
@@ -93,7 +91,6 @@ public class TriColorPaintings {
                 availableGoodColors.remove(3);
         }
         int numPaintings=0;
-        //System.out.println(availableGoodColors);
         for (int color: availableGoodColors)
         {
             currentPainting[currentIndex] = color;
