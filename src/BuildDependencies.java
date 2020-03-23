@@ -25,28 +25,29 @@ public class BuildDependencies {
             String changedFile = br.readLine();
             Stack<String> stack = new Stack<>();
             Stack<String> sort = new Stack<>();
-            buildTopologicalSort(changedFile,sort,dependentFiles, visited);
-//            stack.push(changedFile);
-//            while (!stack.isEmpty()) {
-//                String thisFile = stack.peek();
-//                List<String> dependentFileList = dependentFiles.get(thisFile); //A list of the files that are dependent on this file
-//                visited.put(thisFile, true);
-//                if (dependentFileList == null) {
-//                    stack.pop();
-//                    sort.push(thisFile);
-//                } else {
-//                    int counter = 0; //To ensure we visit all children before adding it to the topological sort
-//                    for (int i = dependentFileList.size()-1; i >=0; i--) {
-//                        if (!visited.get(dependentFileList.get(i))) {
-//                            stack.push(dependentFileList.get(i));
-//                        } else counter++;
-//                    }
-//                    if (counter == dependentFileList.size()) {
-//                        stack.pop();
-//                        sort.push(thisFile);
-//                    }
-//                }
-//            }
+            //buildTopologicalSort(changedFile,sort,dependentFiles, visited);
+            stack.push(changedFile);
+            while (!stack.isEmpty()) {
+                String thisFile = stack.peek();
+                List<String> dependentFileList = dependentFiles.get(thisFile); //A list of the files that are dependent on this file
+                visited.put(thisFile, true);
+                if (dependentFileList == null) {
+                    stack.pop();
+                    sort.push(thisFile);
+                } else {
+                    int counter = 0; //To ensure we visit all children before adding it to the topological sort
+                    for (int i = 0; i <dependentFileList.size(); i++) {
+                        if (!visited.get(dependentFileList.get(i))) {
+                            stack.push(dependentFileList.get(i));
+                            break;
+                        } else counter++;
+                    }
+                    if (counter == dependentFileList.size()) {
+                        stack.pop();
+                        sort.push(thisFile);
+                    }
+                }
+            }
             PrintWriter out = new PrintWriter(System.out);
             while (!sort.isEmpty())
                 out.println(sort.pop());
